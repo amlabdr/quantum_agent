@@ -10,7 +10,7 @@ class capability_agent():
         yf.close()
         self.serialNumber = config["source"]["serial"]
     def run(self,specification,parameters):
-        #return ["ok"]
+        return ["ok"]
         self.source = CLD1015(self.serialNumber)
         if self.source.connected:
             status = ""

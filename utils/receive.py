@@ -13,6 +13,7 @@ class RecvSpecification(MessagingHandler):
         self.server = server
         self.topic = topic
         self.agent = agent
+        logging.info("Agent will start listning for spec in the topic: {}".format(self.topic))
         
         
         
@@ -27,6 +28,7 @@ class RecvSpecification(MessagingHandler):
             logging.info("Analyzer will send receipt to the controller")
             specification = jsonData['specification']
             parameters = jsonData['parameters']
+            endpoint = jsonData['endpoint']
             logging.info("specification received for {}".format(specification))
             logging.info("Agent will send receipt to the controller for {}".format(specification))
            
@@ -42,12 +44,12 @@ class RecvSpecification(MessagingHandler):
             #agent will do the spec
             resultValues = self.agent.run(specification,parameters)
             #Agent will send the results to the controller
-            result_msg = jsonData.copy
+            result_msg = jsonData.copy()
             result_msg['result'] = result_msg['specification']
             del result_msg['specification']
             result_msg['resultValues'] = resultValues
             logging.info("Agent will send result {} to the controller".format(result_msg['resultValues']))
-            result_topic = 'topic:///multiverse/qnet/source/results'################
+            result_topic = 'topic://'+endpoint+'/results'
             Container(Send(self.server,result_topic, result_msg)).run()
         except Exception:
             traceback.print_exc()
