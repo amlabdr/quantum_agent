@@ -1,0 +1,15 @@
+{
+        "label": "Detector probe",
+        "endpoint": "/multiverse/qnet/detector_alice",
+        "when": "now",
+        "name": "detector_alice_probe",
+        "parameters": {},
+        "results": [
+            "counts"       
+        ],
+        "schema": "0123456789012345",
+        "timestamp": "2022-04-21 13:54:10.91",
+        "agentId": "detector_alice",
+        "role": "admin",
+        "capability": "measure"
+}
